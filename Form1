@@ -11,4 +11,3 @@
         cx = cx + S1
     Next i
     Printer.EndDoc
-
