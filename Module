@@ -1,0 +1,516 @@
+Public Function GenBinaryBarcode(Txt As String) As String
+    On Error GoTo ErrLne
+    Dim Binary As String
+    Dim BINVAL As String
+    Dim CharVal As Integer
+    Dim CharCount As Integer
+    Dim CheckSum As Integer
+
+    Binary = "0": BINVAL = "": CharVal = 0: CharCount = 0: CheckSum = 0
+    For i = 1 To Len(Txt)
+        Item = MID(Txt, i, 1)
+        Select Case Item
+        Case Is = " "
+            Binary = Binary & "11011001100"
+            CharVal = 0
+        Case Is = "!"
+            Binary = Binary & "11001101100"
+            CharVal = 1
+        Case Is = """"
+            Binary = Binary & "11001100110"
+            CharVal = 2
+        Case Is = "#"
+            Binary = Binary & "10010011000"
+            CharVal = 3
+        Case Is = "$"
+            Binary = Binary & "10010001100"
+            CharVal = 4
+        Case "%"
+            Binary = Binary & "10001001100"
+            CharVal = 5
+        Case "&"
+            Binary = Binary & "10011001000"
+            CharVal = 6
+        Case "'"
+            Binary = Binary & "10011000100"
+            CharVal = 7
+        Case "("
+            Binary = Binary & "10001100100"
+            CharVal = 8
+        Case ")"
+            Binary = Binary & "11001001000"
+            CharVal = 9
+        Case "*"
+            Binary = Binary & "11001000100"
+            CharVal = 10
+        Case "+"
+            Binary = Binary & "11000100100"
+            CharVal = 11
+        Case ","
+            Binary = Binary & "10110011100"
+            CharVal = 12
+        Case "-"
+            Binary = Binary & "10011011100"
+            CharVal = 13
+        Case "."
+            Binary = Binary & "10011001110"
+            CharVal = 14
+        Case "/"
+            Binary = Binary & "10111001100"
+            CharVal = 15
+        Case "0"
+            Binary = Binary & "10011101100"
+            CharVal = 16
+        Case "1"
+            Binary = Binary & "10011100110"
+            CharVal = 17
+        Case "2"
+            Binary = Binary & "11001110010"
+            CharVal = 18
+        Case "3"
+            Binary = Binary & "11001011100"
+            CharVal = 19
+        Case "4"
+            Binary = Binary & "11001001110"
+            CharVal = 20
+        Case "5"
+            Binary = Binary & "11011100100"
+            CharVal = 21
+        Case "6"
+            Binary = Binary & "11001110100"
+            CharVal = 22
+        Case "7"
+            Binary = Binary & "11101101110"
+            CharVal = 23
+        Case "8"
+            Binary = Binary & "11101001100"
+            CharVal = 24
+        Case "9"
+            Binary = Binary & "11100101100"
+            CharVal = 25
+        Case ":"
+            Binary = Binary & "11100100110"
+            CharVal = 26
+        Case " ;"
+            Binary = Binary & "11101100100"
+            CharVal = 27
+        Case "<"
+            Binary = Binary & "11100110100"
+            CharVal = 28
+        Case "="
+            Binary = Binary & "11100110010"
+            CharVal = 29
+        Case ">"
+            Binary = Binary & "11011011000"
+            CharVal = 30
+        Case "?"
+            Binary = Binary & "11011000110"
+            CharVal = 31
+        Case "@"
+            Binary = Binary & "11000110110"
+            CharVal = 32
+        Case "A"
+            Binary = Binary & "10100011000"
+            CharVal = 33
+        Case "B"
+            Binary = Binary & "10001011000"
+            CharVal = 34
+        Case "C"
+            Binary = Binary & "10001000110"
+            CharVal = 35
+        Case "D"
+            Binary = Binary & "10110001000"
+            CharVal = 36
+        Case "E"
+            Binary = Binary & "10001101000"
+            CharVal = 37
+        Case "F"
+            Binary = Binary & "10001100010"
+            CharVal = 38
+        Case "G"
+            Binary = Binary & "11010001000"
+            CharVal = 39
+        Case "H"
+            Binary = Binary & "11000101000"
+            CharVal = 40
+        Case "I"
+            Binary = Binary & "11000100010"
+            CharVal = 41
+        Case "J"
+            Binary = Binary & "10110111000"
+            CharVal = 42
+        Case "K"
+            Binary = Binary & "10110001110"
+            CharVal = 43
+        Case "L"
+            Binary = Binary & "10001101110"
+            CharVal = 44
+        Case "M"
+            Binary = Binary & "10111011000"
+            CharVal = 45
+        Case "N"
+            Binary = Binary & "10111000110"
+            CharVal = 46
+        Case "O"
+            Binary = Binary & "10001110110"
+            CharVal = 47
+        Case "P"
+            Binary = Binary & "11101110110"
+            CharVal = 48
+        Case "Q"
+            Binary = Binary & "11010001110"
+            CharVal = 49
+        Case "R"
+            Binary = Binary & "11000101110"
+            CharVal = 50
+        Case "S"
+            Binary = Binary & "11011101000"
+            CharVal = 51
+        Case "T"
+            Binary = Binary & "11011100010"
+            CharVal = 52
+        Case "U"
+            Binary = Binary & "11011101110"
+            CharVal = 53
+        Case "V"
+            Binary = Binary & "11101011000"
+            CharVal = 54
+        Case "W"
+            Binary = Binary & "11101000110"
+            CharVal = 55
+        Case "X"
+            Binary = Binary & "11100010110"
+            CharVal = 56
+        Case "Y"
+            Binary = Binary & "11101101000"
+            CharVal = 57
+        Case "Z"
+            Binary = Binary & "11101100010"
+            CharVal = 58
+        Case "["
+            Binary = Binary & "11100011010"
+            CharVal = 59
+        Case "\"
+            Binary = Binary & "11101111010"
+            CharVal = 60
+        Case "]"
+            Binary = Binary & "11001000010"
+            CharVal = 61
+        Case "^"
+            Binary = Binary & "11110001010"
+            CharVal = 62
+        Case "_"
+            Binary = Binary & "10100110000"
+            CharVal = 63
+        Case "`"
+            Binary = Binary & "10100001100"
+            CharVal = 64
+        Case "a"
+            Binary = Binary & "10010110000"
+            CharVal = 65
+        Case "b"
+            Binary = Binary & "10010000110"
+            CharVal = 66
+        Case "c"
+            Binary = Binary & "10000101100"
+            CharVal = 67
+        Case "d"
+            Binary = Binary & "10000100110"
+            CharVal = 68
+        Case "e"
+            Binary = Binary & "10110010000"
+            CharVal = 69
+        Case "f"
+            Binary = Binary & "10110000100"
+            CharVal = 70
+        Case "g"
+            Binary = Binary & "10011010000"
+            CharVal = 71
+        Case "h"
+            Binary = Binary & "10011000010"
+            CharVal = 72
+        Case "i"
+            Binary = Binary & "10000110100"
+            CharVal = 73
+        Case "j"
+            Binary = Binary & "10000110010"
+            CharVal = 74
+        Case "k"
+            Binary = Binary & "11000010010"
+            CharVal = 75
+        Case "l"
+            Binary = Binary & "11001010000"
+            CharVal = 76
+        Case "m"
+            Binary = Binary & "11110111010"
+            CharVal = 77
+        Case "n"
+            Binary = Binary & "11000010100"
+            CharVal = 78
+        Case "o"
+            Binary = Binary & "10001111010"
+            CharVal = 79
+        Case "p"
+            Binary = Binary & "10100111100"
+            CharVal = 80
+        Case "q"
+            Binary = Binary & "10010111100"
+            CharVal = 81
+        Case "r"
+            Binary = Binary & "10010011110"
+            CharVal = 82
+        Case "s"
+            Binary = Binary & "10111100100"
+            CharVal = 83
+        Case "t"
+            Binary = Binary & "10011110100"
+            CharVal = 84
+        Case "u"
+            Binary = Binary & "10011110010"
+            CharVal = 85
+        Case "v"
+            Binary = Binary & "11110100100"
+            CharVal = 86
+        Case "w"
+            Binary = Binary & "11110010100"
+            CharVal = 87
+        Case "x"
+            Binary = Binary & "11110010010"
+            CharVal = 88
+        Case "y"
+            Binary = Binary & "11011011110"
+            CharVal = 89
+        Case "z"
+            Binary = Binary & "11011110110"
+            CharVal = 90
+        Case "{"
+            Binary = Binary & "11110110110"
+            CharVal = 91
+        Case "|"
+            Binary = Binary & "10101111000"
+            CharVal = 92
+        Case "}"
+            Binary = Binary & "10100011110"
+            CharVal = 93
+        Case "~"
+            Binary = Binary & "10001011110"
+            CharVal = 94
+        Case Else
+            MsgBox Item
+        End Select
+        CharCount = CharCount + 1
+        CheckSum = CheckSum + (CharVal * CharCount)
+    Next
+
+    'Include start code B
+    CheckSum = CheckSum + 104
+    'Get the remainder
+    CheckSum = CheckSum Mod 103
+
+    'Set it to zero before we generate Check sum
+    BINVAL = 0
+    Select Case CheckSum
+        Case "0"
+            BINVAL = "11011001100"
+        Case "1"
+            BINVAL = "11001101100"
+        Case "2"
+            BINVAL = "11001100110"
+        Case "3"
+            BINVAL = "10010011000"
+        Case "4"
+            BINVAL = "10010001100"
+        Case "5"
+            BINVAL = "10001001100"
+        Case "6"
+            BINVAL = "10011001000"
+        Case "7"
+            BINVAL = "10011000100"
+        Case "8"
+            BINVAL = "10001100100"
+        Case "9"
+            BINVAL = "11001001000"
+        Case "10"
+            BINVAL = "11001000100"
+        Case "11"
+            BINVAL = "11000100100"
+        Case "12"
+            BINVAL = "10110011100"
+        Case "13"
+            BINVAL = "10011011100"
+        Case "14"
+            BINVAL = "10011001110"
+        Case "15"
+            BINVAL = "10111001100"
+        Case "16"
+            BINVAL = "10011101100"
+        Case "17"
+            BINVAL = "10011100110"
+        Case "18"
+            BINVAL = "11001110010"
+        Case "19"
+            BINVAL = "11001011100"
+        Case "20"
+            BINVAL = "11001001110"
+        Case "21"
+            BINVAL = "11011100100"
+        Case "22"
+            BINVAL = "11001110100"
+        Case "23"
+            BINVAL = "11101101110"
+        Case "24"
+            BINVAL = "11101001100"
+        Case "25"
+            BINVAL = "11100101100"
+        Case "26"
+            BINVAL = "11100100110"
+        Case "27"
+            BINVAL = "11101100100"
+        Case "28"
+            BINVAL = "11100110100"
+        Case "29"
+            BINVAL = "11100110010"
+        Case "30"
+            BINVAL = "11011011000"
+        Case "31"
+            BINVAL = "11011000110"
+        Case "32"
+            BINVAL = "11000110110"
+        Case "33"
+            BINVAL = "10100011000"
+        Case "34"
+            BINVAL = "10001011000"
+        Case "35"
+            BINVAL = "10001000110"
+        Case "36"
+            BINVAL = "10110001000"
+        Case "37"
+            BINVAL = "10001101000"
+        Case "38"
+            BINVAL = "10001100010"
+        Case "39"
+            BINVAL = "11010001000"
+        Case "40"
+            BINVAL = "11000101000"
+        Case "41"
+            BINVAL = "11000100010"
+        Case "42"
+            BINVAL = "10110111000"
+        Case "43"
+            BINVAL = "10110001110"
+        Case "44"
+            BINVAL = "10001101110"
+        Case "45"
+            BINVAL = "10111011000"
+        Case "46"
+            BINVAL = "10111000110"
+        Case "47"
+            BINVAL = "10001110110"
+        Case "48"
+            BINVAL = "11101110110"
+        Case "49"
+            BINVAL = "11010001110"
+        Case "50"
+            BINVAL = "11000101110"
+        Case "51"
+            BINVAL = "11011101000"
+        Case "52"
+            BINVAL = "11011100010"
+        Case "53"
+            BINVAL = "11011101110"
+        Case "54"
+            BINVAL = "11101011000"
+        Case "55"
+            BINVAL = "11101000110"
+        Case "56"
+            BINVAL = "11100010110"
+        Case "57"
+            BINVAL = "11101101000"
+        Case "58"
+            BINVAL = "11101100010"
+        Case "59"
+            BINVAL = "11100011010"
+        Case "60"
+            BINVAL = "11101111010"
+        Case "61"
+            BINVAL = "11001000010"
+        Case "62"
+            BINVAL = "11110001010"
+        Case "63"
+            BINVAL = "10100110000"
+        Case "64"
+            BINVAL = "10100001100"
+        Case "65"
+            BINVAL = "10010110000"
+        Case "66"
+            BINVAL = "10010000110"
+        Case "67"
+            BINVAL = "10000101100"
+        Case "68"
+            BINVAL = "10000100110"
+        Case "69"
+            BINVAL = "10110010000"
+        Case "70"
+            BINVAL = "10110000100"
+        Case "71"
+            BINVAL = "10011010000"
+        Case "72"
+            BINVAL = "10011000010"
+        Case "73"
+            BINVAL = "10000110100"
+        Case "74"
+            BINVAL = "10000110010"
+        Case "75"
+            BINVAL = "11000010010"
+        Case "76"
+            BINVAL = "11001010000"
+        Case "77"
+            BINVAL = "11110111010"
+        Case "78"
+            BINVAL = "11000010100"
+        Case "79"
+            BINVAL = "10001111010"
+        Case "80"
+            BINVAL = "10100111100"
+        Case "81"
+            BINVAL = "10010111100"
+        Case "82"
+            BINVAL = "10010011110"
+        Case "83"
+            BINVAL = "10111100100"
+        Case "84"
+            BINVAL = "10011110100"
+        Case "85"
+            BINVAL = "10011110010"
+        Case "86"
+            BINVAL = "11110100100"
+        Case "87"
+            BINVAL = "11110010100"
+        Case "88"
+            BINVAL = "11110010010"
+        Case "89"
+            BINVAL = "11011011110"
+        Case "90"
+            BINVAL = "11011110110"
+        Case "91"
+            BINVAL = "11110110110"
+        Case "92"
+            BINVAL = "10101111000"
+        Case "93"
+            BINVAL = "10100011110"
+        Case "94"
+            BINVAL = "10001011110"
+    End Select
+    'Check sum
+
+    Binary = "00011010010000" & Binary & BINVAL & "1100011101011000"
+    GenBinaryBarcode = Binary
+
+    Exit Function
+
+ErrLne:
+    ChkErr = Err.Number
+    MsgBox "Error " & Err.Number & " : " & Err.Description, vbInformation
+    Resume Next
+
+End Function
