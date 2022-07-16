@@ -1,0 +1,14 @@
+    t1 = GenBinaryBarcode("Profess79")
+    Printer.CurrentX = 0: Printer.CurrentY = 0: Printer.Print " "
+    cx = 100: S1 = 5555 / Len(t1)
+    For i = 1 To Len(t1)
+        t2 = MID(t1, i, 1)
+        If t2 = "0" Then
+            Printer.Line (cx, 500)-(cx + 20, 2000), vbWhite, BF
+        Else
+            Printer.Line (cx, 500)-(cx + 20, 2000), vbBlack, BF
+        End If
+        cx = cx + S1
+    Next i
+    Printer.EndDoc
+
